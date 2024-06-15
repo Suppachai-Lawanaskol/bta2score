@@ -8,7 +8,7 @@ program define bta2score , rclass
 	if _rc==111{
 		di as error "{bf} bta2score {sf} is postestimation command matrix r(table) is not found, please immediately execute after regression"
 	}
-	capture confirm matrix r(b)
+	capture confirm matrix e(b)
 	if _rc==111{
 		di as error "{bf} bta2score {sf} is postestimation command matrix e(b) is not found, please immediately execute after regression"
 	}
