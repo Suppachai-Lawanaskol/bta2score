@@ -1,8 +1,18 @@
-*! version 1.2 30May2024
+*! version 1.3 15June2024
 ***Suppachai Lawanaskol, MD***
 program define bta2score , rclass
 	version 16.0
 	syntax [, Name(string) Decimal(numlist) TABulation KEEPcons REPLACE CSTAT DSTAT AIC BIC GOF RSQUARE]
+	**Checking the existing result matrix**
+	capture confirm matrix r(table)
+	if _rc==111{
+		di as error "{bf} bta2score {sf} is postestimation command matrix r(table) is not found, please immediately execute after regression"
+	}
+	capture confirm matrix r(b)
+	if _rc==111{
+		di as error "{bf} bta2score {sf} is postestimation command matrix e(b) is not found, please immediately execute after regression"
+	}
+
 	**Define variable name contain the derivation individual score**
 	**Define the coefficient matrix**
 	qui mat def coef=e(b)
